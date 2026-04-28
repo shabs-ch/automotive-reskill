@@ -1,0 +1,49 @@
+Ingenierbüro Channel Cologne, Germany
+Working student – Engineering design Jan 2020 - present
+• Modelling with Solidworks
+• Pressurized vessel construction
+• Steel construction with RSTAB
+• Pipeline construction with Caesar 2
+Tata Consultancy Services Hyderabad, India
+Assistant Systems Engineer Jun 2016 – Aug 2017
+• Worked in Fiat Chrysler Automobiles project in manufacturing domain in Parts Setup application in the
+Mainframe environment.
+• Defect tracking and resolution of issues related to bill of materials and parts in after sale services.
+• Analysing the business requirements and transforming the requirements to functional design specifications.
+• Development & optimization of the existing/new COBOL and JCL modules.
+• Design, code, unit test, debug of the code and produced high quality deliverables.
+• Frequently reviewed customer feedback and further improved the processes, which increased the
+customer satisfaction index from 81% to 90%.
+• Engineering division – In-plant training in the Quality control department.
+• Analysed the received parts and materials for production processes to ensure the company standards.
+• Obtained knowledge to handle tools and learned to work in a large-scale industrial
+atmosphere.
+• Acquired complete knowledge about production management in vehicle assembly.
+Education
+RWTH Aachen University Aachen, North Rhine-Westphalia
+Master of Science On going
+Production Systems Engineering
+VIT University Vellore, Tamil Nadu
+Bachelor of Technology Graduated May 2016
+Mechanical Engineering
+VST Tillers and Tractors Bengaluru, India
+Intern Dec 2014 - Jan 2015
+Project Experience
+Master Thesis: Development of dynamic decision model for the integration of operational failures in planning
+and control of the agile assembly.
+• The topic aims at handling the operational failures in the low-cost agile assembly dynamically using a
+flexible workers team and centralized rework station
+• A smart information technology framework for an adequate visualization of assembly- and quality-related
+information on the vehicle assembly line and for rework activities is developed
+• A quality information management model for smart control of rework information in the vehicle assembly
+line and centralized rework station.
+Bachelor Thesis: Design and fabrication of universal vibration apparatus with base excitation.
+• The motivation is to achieve a simpler model of the setup compared to some other complex models
+available in the market.
+• Base of the exciter assembly has been designed by Solid works, the assembly consists of a connecting
+rod and slider mechanism further connected to a rotary disc and uses a motor for obtaining the rotary
+motion.
+Other Project Works:
+• Research study on stress analysis of tyre-coupling.
+• Design and fabrication of wear testing machine.
+• Research study on welding of dissimilar materials.
