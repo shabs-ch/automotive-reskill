@@ -14,6 +14,9 @@ pinned: false
 
 AI-powered skills mapping and reskilling tool for German automotive engineers facing displacement.
 
+## Live Demo
+https://huggingface.co/spaces/shabs-ch/automotive-reskill
+
 ## Status
 Week 1, Day 3 — deployed prototype
 

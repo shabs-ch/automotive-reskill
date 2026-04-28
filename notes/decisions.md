@@ -19,3 +19,16 @@
 **Persona**: Expert CV reviewer persona in prompt raises quality ceiling — Claude behaves like a senior recruiter not a parser.
 
 **JSON safety**: isinstance check on display handles cases where Claude returns flat list instead of grouped dict.
+
+## Day 3
+
+**HuggingFace deployment**: Streamlit Spaces uses port 8501 by default — 
+never override port in config.toml. Only set headless=true, 
+enableCORS=false, gatherUsageStats=false.
+
+**Secret management**: ANTHROPIC_API_KEY stored as HF Space secret — 
+never in code or committed files.
+
+**Two remotes**: origin (GitHub) for backup/portfolio, 
+space (HuggingFace) for deployment. Push to both after every 
+significant change.
