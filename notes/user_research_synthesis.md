@@ -78,6 +78,20 @@ still employed but anticipating displacement. This segment may be highly
 motivated to act early and may have access to employer training budgets 
 in addition to Bildungsgutschein.
 
+**4. Most users prefer automotive-adjacent transition over full domain switch**
+4 of 6 users expressed preference to stay within automotive and upskill 
+rather than fully switch domains. Only 2 are actively targeting 
+cross-domain AI roles. 
+
+This suggests role recommendations should prioritise automotive AI 
+adjacent roles (SDV, digital twin, Industry 4.0, autonomous) alongside 
+cross-domain AI roles — not cross-domain first.
+
+**Validation needed**: users expressed preference to stay in automotive 
+but did not specifically name SDV/digital twin/Industry 4.0 roles. 
+Follow-up interviews should ask: "What specific roles are you targeting 
+within automotive?" before building this assumption into the ontology.
+
 ---
 
 ## What They DON'T Need

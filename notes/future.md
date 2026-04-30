@@ -10,3 +10,7 @@
 - **File upload**: allow CV upload as PDF/Word instead of text paste
 - **Transferable skills taxonomy**: map extracted skills to named 
   categories (structured problem-solving, change management etc.)
+- **Automotive-adjacent role track**: validate whether displaced 
+  engineers are aware of and targeting SDV, digital twin, Industry 4.0, 
+  autonomous roles specifically. If confirmed in follow-up interviews, 
+  add as Tier 1 role families alongside cross-domain AI roles.
