@@ -14,3 +14,9 @@
   engineers are aware of and targeting SDV, digital twin, Industry 4.0, 
   autonomous roles specifically. If confirmed in follow-up interviews, 
   add as Tier 1 role families alongside cross-domain AI roles.
+
+## Enhancement — Bridge Actions
+Bridge actions in automotive_to_ai_mappings.yaml are currently generic. 
+Revisit on Day 12 with real course data (Day 18 corpus) and real job ad 
+requirements (Day 8). Target: every bridge action cites a real, 
+named, BG-eligible course where possible.
