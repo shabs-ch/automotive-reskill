@@ -32,3 +32,29 @@ never in code or committed files.
 **Two remotes**: origin (GitHub) for backup/portfolio, 
 space (HuggingFace) for deployment. Push to both after every 
 significant change.
+
+
+## Weekend — Week 1
+
+**User story scope**: Added US6 (Gap understanding) based on interview 
+finding that rejection patterns are invisible to users. Directly maps 
+to Week 3 gap analysis module.
+
+**Role discovery framing**: US2 updated to cover both automotive-adjacent 
+and cross-domain roles equally. Automotive-adjacent (SDV, digital twin, 
+Industry 4.0) not explicitly named by users — treat as hypothesis until 
+confirmed in follow-up interviews.
+
+**Product flow**: 7-screen linear flow defined. BG checker uses pure 
+rules engine — no LLM. All other screens use Claude.
+
+**CV reframing**: bilingual output non-negotiable — English + German 
+both required. Users applying to both German market and international 
+roles.
+
+**Portfolio projects**: added to roadmap screen (Screen 5) as 
+non-negotiable. Personalised to target role and user's domain background.
+
+**v1 scope boundary**: no file upload, no user accounts, no session 
+saving, no Turkish UI, no values alignment feature — all deferred to 
+future.md.
