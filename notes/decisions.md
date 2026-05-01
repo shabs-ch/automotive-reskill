@@ -58,3 +58,23 @@ non-negotiable. Personalised to target role and user's domain background.
 **v1 scope boundary**: no file upload, no user accounts, no session 
 saving, no Turkish UI, no values alignment feature — all deferred to 
 future.md.
+
+cat >> notes/decisions.md << 'EOF'
+
+## Day 7
+
+**ESCO ingest**: Downloaded ESCO v1.2.0 CSV (English). Filtered 13,960 
+skills to 1,255 relevant using keyword matching. Filter is broad — 
+some noise (e.g. "cleaning industry safety") expected. Will tighten 
+during ontology building on Day 11.
+
+**Processed outputs**: Saved to data/processed/ (gitignored).
+Scripts saved to src/ (committed).
+
+**Files used**: skills_en.csv, skillGroups_en.csv, occupations_en.csv,
+occupationSkillRelations_en.csv, digitalSkillsCollection_en.csv
+EOF
+**ESCO filter refinement**: Tightened keyword list (specific phrases 
+over single words) + added exclusion list for irrelevant domains 
+(food, hospitality, agriculture etc.). Final count: 349 skills. 
+Two-pass filter pattern: include if relevant AND exclude if noisy.
