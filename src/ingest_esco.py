@@ -51,24 +51,36 @@ print("\nFiltering relevant skills...")
 # Keywords relevant to automotive→AI transition
 RELEVANT_KEYWORDS = [
     # Technical/AI
-    "machine learning", "artificial intelligence", "python", "data",
+    "machine learning", "artificial intelligence", "python", "data analysis",
     "software", "programming", "algorithm", "neural", "deep learning",
     "computer vision", "natural language", "cloud", "devops", "mlops",
     # Automotive/Engineering
-    "embedded", "automotive", "safety", "testing", "validation",
-    "requirements", "systems engineering", "quality", "simulation",
-    "control", "autonomous", "sensor",
+    "embedded", "automotive", "functional safety", "testing", "validation",
+    "requirements", "systems engineering", "quality assurance", "simulation",
+    "control systems", "autonomous",
     # Management/transferable
-    "project management", "program management", "stakeholder",
-    "requirements engineering", "process", "agile", "change management",
+    "project management", "program management", "stakeholder management",
+    "requirements engineering", "process improvement", "agile", "change management",
     "risk management", "leadership"
+]
+EXCLUDE_KEYWORDS = [
+    "food", "cage", "ramp", "wild game", "cleaning", "railway",
+    "catering", "livestock", "agricultural", "fishing", "mining",
+    "hairdress", "beauty", "nursing", "dental", "veterinary",
+    "hospitality", "hotel", "cooking", "baking", "textile"
 ]
 
 def is_relevant(label):
     if pd.isna(label):
         return False
     label_lower = str(label).lower()
-    return any(kw in label_lower for kw in RELEVANT_KEYWORDS)
+    # Must match at least one relevant keyword
+    if not any(kw in label_lower for kw in RELEVANT_KEYWORDS):
+        return False
+    # Must not match any exclusion keyword
+    if any(ex in label_lower for ex in EXCLUDE_KEYWORDS):
+        return False
+    return True
 
 skills_filtered = skills_df[
     skills_df["preferredLabel"].apply(is_relevant)
