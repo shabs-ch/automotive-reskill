@@ -4,4 +4,4 @@ __pycache__/
 data/raw/
 *.pyc
 .DS_Store
-*.code-workspacedata/
+*.code-workspacedata/data/processed/
