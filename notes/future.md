@@ -20,3 +20,7 @@ Bridge actions in automotive_to_ai_mappings.yaml are currently generic.
 Revisit on Day 12 with real course data (Day 18 corpus) and real job ad 
 requirements (Day 8). Target: every bridge action cites a real, 
 named, BG-eligible course where possible.
+
+**Gap Analysis v2**: connect Job Ads ChromaDB directly to ground 
+  gap analysis in live market requirements, not just ontology. 
+  Useful when ontology and market diverge over time.
