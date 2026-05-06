@@ -74,7 +74,78 @@ Scripts saved to src/ (committed).
 **Files used**: skills_en.csv, skillGroups_en.csv, occupations_en.csv,
 occupationSkillRelations_en.csv, digitalSkillsCollection_en.csv
 EOF
+
 **ESCO filter refinement**: Tightened keyword list (specific phrases 
 over single words) + added exclusion list for irrelevant domains 
 (food, hospitality, agriculture etc.). Final count: 349 skills. 
 Two-pass filter pattern: include if relevant AND exclude if noisy.
+
+**Job ads curation**: Manually filtered ads for transition realism — 
+excluded PhD-level research roles, 8+ years ML experience requirements, 
+and pure deep learning research positions. Corpus reflects realistic 
+3-5 year experience roles where automotive domain knowledge is valued.
+
+**Day 8 corpus reality check**: Industry 4.0 AI Engineer, Digital Twin 
+Engineer, and AI Solutions Engineer roles not findable as distinct job 
+titles in target industries (automotive, aerospace, manufacturing, 
+railways, agricultural machinery). These appear as concepts in job ads 
+for MLOps, ML Engineer, and ADAS roles — not as standalone titles.
+
+Dropped from corpus as separate families. Skill requirements captured 
+indirectly through ml_engineer and mlops_engineer ads.
+
+Implication for ontology (Day 11): Don't create separate role families 
+for these titles. Group under broader categories.
+
+**Day 8 corpus decision**: Combined AI Program Manager, AI Product 
+Manager and AI Transformation Lead into single role family 'ai_manager' 
+due to limited job ad availability in target industries. These roles 
+share significant skill overlap for automotive transition profiles.
+
+**Day 8 corpus observation**: ML Engineer ads in target industries 
+cover embedded SW, SW architects, and safety/security sparsely. 
+No standalone safety or security AI job families found. Safety/security 
+skills appear as requirements within existing families — will be 
+captured by embedding, not by separate job family. 
+US ads: 3-4 in corpus — acceptable, skills are universal.
+
+**Day 8 final corpus scope**: Reduced to 4 role families based on 
+actual German market availability in target industries:
+- mlops_engineer (includes some automotive-adjacent)
+- ml_engineer (includes edge_ai)
+- ai_mngr (combined PM/PgM/transformation)
+- ml_test (includes autonomous/ADAS validation ads)
+
+Dropped: industry40, digital_twin, ai_solutions, functional_safety, 
+adas_validation — titles not present as distinct roles in target 
+industries. Skills captured indirectly through other families.
+
+Implication for ontology Day 11: 4 primary role families, 
+not 10. Cleaner, more defensible.
+
+## Day 8
+
+**Final corpus**: 60 job ads across 4 role families
+- mlops_engineer: 17, ml_engineer: 18, 
+  ai_mngr: 15, ml_test: 10
+- 28 DE / 32 EN, 27 automotive-adjacent / 33 cross-domain
+- Restricted to engineering-heavy industries: automotive, 
+  aerospace, railways, manufacturing, agricultural machinery
+
+**Role family consolidation**: Reduced from 10 planned families 
+to 4 actual — industry40, digital_twin, ai_solutions, 
+functional_safety, adas_validation, edge_ai not findable 
+as distinct titles in target industries.
+
+**Corpus curation decisions**:
+- International ads allowed — skills universal, geography 
+  only matters for job recommendations not skill extraction
+- EXPERIENCE_LEVEL tagged: realistic / inflated
+- German ads translated to English, tagged LANGUAGE: DE
+- Combined AI PM + PgM + Transformation → ai_mngr
+- edge_ai merged into ml_engineer
+- ml_test includes 3 autonomous/ADAS validation ads
+
+**Corpus quality over quantity**: 60 curated ads from 
+right industries beats 150 noisy generic ads.
+ 
