@@ -149,3 +149,27 @@ as distinct titles in target industries.
 **Corpus quality over quantity**: 60 curated ads from 
 right industries beats 150 noisy generic ads.
  
+ **adesso health solutions ad**: Initially flagged as noise but 
+content is high quality — MLOps tools, regulated environment, 
+Python/ML stack. Appearing broadly due to narrow score range 
+(0.64-0.69), not poor content. Will address with metadata 
+filtering in role matcher Day 10.
+
+## Day 9
+
+**Embedding model**: BAAI/bge-m3 — multilingual, handles DE+EN 
+job ads without translation issues.
+
+**ChromaDB**: PersistentClient, cosine similarity, 60 ads indexed.
+Collection: job_ads.
+
+**Search quality**: Score range 0.64-0.69 — narrow but functional.
+All 4 role families queryable. Domain filter working.
+ai_mngr family requires management-focused queries to surface —
+correct behaviour, not a bug.
+
+**Noise identified**: adesso health solutions ad appearing in top 
+results for all technical queries — generic requirements section.
+Review and potentially remove.
+
+**Next**: Wire into Streamlit UI on Day 10.
