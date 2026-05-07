@@ -173,3 +173,23 @@ results for all technical queries — generic requirements section.
 Review and potentially remove.
 
 **Next**: Wire into Streamlit UI on Day 10.
+
+## Day 11
+
+**Skill ontology**: Built from job ads corpus (not ESCO — ESCO too 
+weak on modern AI/ML skills). 4 role families, 130 skill entries.
+Sources: 60 job ads via Claude Code extraction + Excel mappings + 
+domain expertise.
+
+**ESCO role**: Used for transferable/engineering foundation skills 
+only — not for AI/ML specific skills. Modern ML stack not in ESCO.
+
+**Key ontology findings**:
+- ml_test most automotive-specific — ISO 26262/SOTIF (4/7 ads)
+- ai_mngr technical depth deliberately shallow — Python in 1/12 ads
+- Automotive-adjacent MLOps expects Terraform ownership vs cross-domain
+- GenAI/LLMs surging in automotive ML (6/11 BMW-driven)
+- EU AI Act governance fast-growing unique to ai_mngr (5/12 ads)
+
+**Bridge skills**: 5 prioritised learning steps per role family —
+ordered by what to learn first.
