@@ -215,3 +215,13 @@ ml_test(4).
 
 **Known gaps**: Bridge Action (Automotive Path) mostly empty — 
 will enrich after Day 18 course corpus is built.
+
+**Profile classifier calibration**: 
+- Raised threshold from 0.5 to 0.6
+- Added calibration rules to prompt — junior profiles (<5 years, 
+  no team leadership) score below 0.5 for ai_mngr
+- Low confidence fallback: show 1 result from each of 4 families
+  instead of forcing top-ranked family
+- Bug found: standalone test used simplified profile (score 0.52) 
+  but live app used full extracted profile (score 0.72) — 
+  always test end-to-end, not just with simplified fixtures
