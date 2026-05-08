@@ -152,6 +152,16 @@ if st.session_state.skills:
         )
 
     if matches:
+        # Check if any match has low confidence
+        if matches and matches[0].get("family_fit_score", 1.0) < 0.6:
+            st.warning(
+            "⚠️ Your profile doesn't strongly match any single AI "
+            "role family yet. We're showing one example from each "
+            "direction so you can explore which path interests you "
+            "most — then use gap analysis to understand what "
+            "upskilling each path requires."
+        )
+
         for i, match in enumerate(matches):
             with st.expander(
                 f"#{i+1} — {match['title']} at {match['company']} "
@@ -166,6 +176,12 @@ if st.session_state.skills:
                 with col3:
                     st.metric("Experience Level", match["experience_level"])
 
+                st.caption(
+                    f"🎯 Role family fit: "
+                    f"{match.get('family_fit_score', 0):.0%} — "
+                    f"{match.get('family_rationale', '')}"
+                )
+
                 st.caption(f"📍 {match['location']}")
 
                 if match["experience_level"] == "inflated":
@@ -178,9 +194,95 @@ if st.session_state.skills:
 
                 st.markdown("**Why this matches — key requirements:**")
                 st.text(match["snippet"])
-
     else:
         st.info("No matches found. Try changing your role preference filter.")
+
+    # ── Screen 4: Gap Analysis ───────────────────────────────────
+    st.divider()
+    st.header("Step 4 — Gap Analysis")
+
+    # Map role_family display names
+    family_labels = {
+        "mlops_engineer": "MLOps Engineer",
+        "ml_engineer": "ML Engineer",
+        "ml_test": "ML Test Engineer",
+        "ai_mngr": "AI Manager / Product Manager"
+    }
+
+    selected_family = st.selectbox(
+        "Select your target role family for gap analysis:",
+        options=list(family_labels.keys()),
+        format_func=lambda x: family_labels[x]
+    )
+
+    if st.button("Analyse My Gaps", type="primary"):
+        with st.spinner("Analysing your skill gaps..."):
+            from src.gap_analyzer import analyze_gap
+
+            gap_result = analyze_gap(
+                skills_profile=skills,
+                target_role_family=selected_family,
+                domain_preference=domain_map[domain_filter] or "both"
+            )
+
+            if "error" in gap_result:
+                st.error(f"Gap analysis failed: {gap_result['error']}")
+            else:
+                # Already Have
+                st.subheader("✅ You Already Have")
+                for item in gap_result.get("already_have", []):
+                    with st.expander(
+                        f"{item['skill']} — {item['strength'].upper()}"
+                    ):
+                        st.write(item["relevance"])
+
+                # Transfers With Bridging
+                st.subheader("↗️ Transfers With Bridging")
+                for item in gap_result.get("transfers_with_bridging", []):
+                    with st.expander(
+                        f"{item['current_skill']} → {item['target_skill']} "
+                        f"({item['effort']})"
+                    ):
+                        st.write(f"**Bridge action**: {item['bridge_action']}")
+
+                # Need To Learn
+                st.subheader("⬆️ You Need To Learn")
+                for item in gap_result.get("need_to_learn", []):
+                    priority_color = {
+                        "high": "🔴",
+                        "medium": "🟡",
+                        "low": "🟢"
+                    }.get(item["priority"], "⚪")
+                    st.markdown(
+                        f"{priority_color} **{item['skill']}** "
+                        f"— {item['reason']}"
+                    )
+
+                # First Steps
+                st.subheader("🌉 Recommended First Steps")
+                for i, step in enumerate(
+                    gap_result.get("recommended_first_steps", []), 1
+                ):
+                    st.markdown(f"**{i}.** {step}")
+
+                # Readiness
+                readiness = gap_result.get("overall_readiness", "")
+                readiness_color = {
+                    "strong": "🟢",
+                    "moderate": "🟡",
+                    "early": "🔴"
+                }.get(readiness, "⚪")
+
+                st.divider()
+                st.subheader(
+                    f"📊 Overall Readiness: "
+                    f"{readiness_color} {readiness.upper()}"
+                )
+                st.info(gap_result.get("readiness_summary", ""))
+
+                # Cost tracking
+                tokens = gap_result.get("_tokens", {})
+                st.session_state.total_cost += tokens.get("cost_usd", 0)
 
     # ── Cost tracker ─────────────────────────────────────────────
     st.divider()
