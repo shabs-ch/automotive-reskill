@@ -193,3 +193,25 @@ only — not for AI/ML specific skills. Modern ML stack not in ESCO.
 
 **Bridge skills**: 5 prioritised learning steps per role family —
 ordered by what to learn first.
+
+**automotive_to_ai_mappings**: Excel v1 used for Day 12 YAML 
+conversion — intentionally incomplete. Will enrich during 
+Week 3-4 as course corpus and eval findings provide better 
+grounding for bridge actions and skill requirements.
+
+## Day 12
+
+**automotive_to_ai_mappings.yaml**: 30 mappings converted from Excel.
+Role families: mlops_engineer(12), ai_mngr(8), ml_engineer(6), 
+ml_test(4).
+
+**Conversion decisions**:
+- ai_integration, ai_architect, ai_system_engineer → mlops_engineer
+- ai_simulation added to ml_test as well as ml_engineer
+- Removed entirely: ai_systems_engineer, simulation, rl_engineer
+  (not present as distinct roles in job market)
+- Deduplication by source+target combination
+- role_families is a list — mappings can belong to multiple families
+
+**Known gaps**: Bridge Action (Automotive Path) mostly empty — 
+will enrich after Day 18 course corpus is built.
