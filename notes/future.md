@@ -24,3 +24,10 @@ named, BG-eligible course where possible.
 **Gap Analysis v2**: connect Job Ads ChromaDB directly to ground 
   gap analysis in live market requirements, not just ontology. 
   Useful when ontology and market diverge over time.
+
+## Prompt improvements
+- **Transferable skills quality**: Current extraction produces 
+  generic or low-value transferable skills. Needs prompt improvement 
+  after eval framework is built on Day 16 — fix with evidence, 
+  not guessing. Possible fix: few-shot examples of good vs bad 
+  transferable skill extraction.

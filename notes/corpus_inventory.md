@@ -17,6 +17,7 @@
 - "Funktionale Sicherheit" AI OR "SOTIF" Engineer OR "Functional Safety" AI
 
 #### Cross-Domain AI (Tier 2)
+- ML Engineer
 - MLOps Engineer
 - "AI Product Manager"
 - "AI Program Manager"  
