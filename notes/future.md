@@ -31,3 +31,15 @@ named, BG-eligible course where possible.
   after eval framework is built on Day 16 — fix with evidence, 
   not guessing. Possible fix: few-shot examples of good vs bad 
   transferable skill extraction.
+
+## HuggingFace persistent ChromaDB
+ChromaDB on HF free tier is ephemeral — resets on Space restart.
+Options for v2: HF Datasets as persistent storage, or hosted 
+vector DB (Pinecone free tier). Needed before public launch.
+
+## ESCO integration (v2)
+ESCO taxonomy currently unused in pipeline — job ads corpus 
+produced better ontology for AI/ML skills. Potential v2 use:
+skill label standardisation (mapping messy CV text to canonical 
+ESCO labels) and German↔English skill equivalence for multilingual
+CV processing.

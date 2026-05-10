@@ -198,3 +198,11 @@
   (Currently using Sonnet everywhere — optimise in v2.)
 - Latency: embedding model loads once, reused. 
   First run slow (~10s model load), subsequent runs fast.
+
+- **Day 11**: ESCO taxonomy too weak for modern AI/ML skills — 
+  MLflow, Kubeflow, LLMs, SOTIF absent. Job ads corpus produced 
+  richer, more current ontology. ESCO useful for transferable/
+  engineering foundation skills only, and even there Claude 
+  handles skill standardisation gracefully without it.
+  ESCO ingest script kept for potential v2 use (multilingual 
+  skill standardisation) but not in current pipeline.
