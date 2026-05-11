@@ -225,3 +225,8 @@ will enrich after Day 18 course corpus is built.
 - Bug found: standalone test used simplified profile (score 0.52) 
   but live app used full extracted profile (score 0.72) — 
   always test end-to-end, not just with simplified fixtures
+
+**Streamlit spinner delay**: Spinner appears slightly after button 
+click due to Streamlit's synchronous re-render cycle. Not fixable 
+without async architecture. Acceptable for v1 — user sees spinner 
+within 1-2 seconds of clicking.

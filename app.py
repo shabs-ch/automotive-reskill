@@ -13,6 +13,14 @@ client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 PROMPT_PATH = Path(__file__).parent / "prompts" / "extract_skills_v1.txt"
 PROMPT_TEMPLATE = PROMPT_PATH.read_text(encoding="utf-8")
 
+    # Map role_family display names
+family_labels = {
+    "mlops_engineer": "MLOps Engineer",
+    "ml_engineer": "ML Engineer",
+    "ml_test": "ML Test Engineer",
+    "ai_mngr": "AI Manager / Product Manager"
+}
+
 # ── Page config ──────────────────────────────────────────────────
 st.set_page_config(
     page_title="Automotive Reskill",
@@ -164,21 +172,39 @@ if st.session_state.skills:
 
         for i, match in enumerate(matches):
             with st.expander(
-                f"#{i+1} — {match['title']} at {match['company']} "
-                f"(Score: {match['match_score']})",
+                f"#{i+1} — {match['title']} at {match['company']}",
                 expanded=(i == 0)
             ):
-                col1, col2, col3 = st.columns(3)
+                col1, col2, col3, col4 = st.columns(4)
                 with col1:
-                    st.metric("Role Family", match["role_family"])
+                    st.metric("Role Family", family_labels.get(
+                        match["role_family"], match["role_family"]
+                    ))
                 with col2:
-                    st.metric("Domain", match["domain"])
+                    st.metric("Domain", match["domain"].replace("_", " ").title())
                 with col3:
-                    st.metric("Experience Level", match["experience_level"])
+                    st.metric("Experience Level", match["experience_level"].title())
+                with col4:
+                    fit_pct = int(match.get("family_fit_score", 0) * 100)
+                    st.metric("Profile Fit", f"{fit_pct}%",
+                        help="How well your overall profile matches "
+                             "this role family — based on your skills, "
+                             "experience, and background."
+                    )
+
+                # Qualitative match label
+                fit_score = match.get("family_fit_score", 0)
+                semantic_score = match.get("match_score", 0)
+
+                if fit_score >= 0.8:
+                    fit_label = "🟢 Strong Match"
+                elif fit_score >= 0.6:
+                    fit_label = "🟡 Good Match"
+                else:
+                    fit_label = "🔵 Possible Match"
 
                 st.caption(
-                    f"🎯 Role family fit: "
-                    f"{match.get('family_fit_score', 0):.0%} — "
+                    f"{fit_label} — "
                     f"{match.get('family_rationale', '')}"
                 )
 
@@ -192,8 +218,8 @@ if st.session_state.skills:
                         "requirements."
                     )
 
-                st.markdown("**Why this matches — key requirements:**")
-                st.text(match["snippet"])
+                with st.expander("See job requirements snippet"):
+                    st.text(match["snippet"])
     else:
         st.info("No matches found. Try changing your role preference filter.")
 
@@ -201,22 +227,28 @@ if st.session_state.skills:
     st.divider()
     st.header("Step 4 — Gap Analysis")
 
-    # Map role_family display names
-    family_labels = {
-        "mlops_engineer": "MLOps Engineer",
-        "ml_engineer": "ML Engineer",
-        "ml_test": "ML Test Engineer",
-        "ai_mngr": "AI Manager / Product Manager"
-    }
+    # Extract unique role families from matched results
+    matched_families = list(dict.fromkeys(
+        m["role_family"] for m in matches
+        if m["role_family"] in family_labels
+    ))
+
+    # Fallback to all families if none found
+    if not matched_families:
+        matched_families = list(family_labels.keys())
 
     selected_family = st.selectbox(
         "Select your target role family for gap analysis:",
-        options=list(family_labels.keys()),
+        options=matched_families,
         format_func=lambda x: family_labels[x]
     )
 
     if st.button("Analyse My Gaps", type="primary"):
-        with st.spinner("Analysing your skill gaps..."):
+        with st.spinner(
+            "Analysing your skill gaps — comparing your profile "
+            "against role requirements and automotive mappings. "
+            "This takes 20-30 seconds..."
+        ):
             from src.gap_analyzer import analyze_gap
 
             gap_result = analyze_gap(
@@ -230,6 +262,11 @@ if st.session_state.skills:
             else:
                 # Already Have
                 st.subheader("✅ You Already Have")
+                st.caption(
+                    "Skills from your automotive background that are "
+                    "directly valued in this AI role — these are your "
+                    "strengths. Highlight them in applications."
+                )
                 for item in gap_result.get("already_have", []):
                     with st.expander(
                         f"{item['skill']} — {item['strength'].upper()}"
@@ -238,6 +275,12 @@ if st.session_state.skills:
 
                 # Transfers With Bridging
                 st.subheader("↗️ Transfers With Bridging")
+                st.caption(
+                    "Skills you already have that map to AI role "
+                    "requirements with a specific learning step to "
+                    "activate the connection. Foundation exists — "
+                    "just needs targeted upskilling."
+                )
                 for item in gap_result.get("transfers_with_bridging", []):
                     with st.expander(
                         f"{item['current_skill']} → {item['target_skill']} "
@@ -247,6 +290,11 @@ if st.session_state.skills:
 
                 # Need To Learn
                 st.subheader("⬆️ You Need To Learn")
+                st.caption(
+                    "Skills genuinely absent from your profile that "
+                    "this role requires. These are your real gaps — "
+                    "not covered by any existing skill you have."
+                )
                 for item in gap_result.get("need_to_learn", []):
                     priority_color = {
                         "high": "🔴",
@@ -260,6 +308,12 @@ if st.session_state.skills:
 
                 # First Steps
                 st.subheader("🌉 Recommended First Steps")
+                st.caption(
+                    "A prioritised action plan: activate your transfers "
+                    "first (quickest wins), then close genuine gaps. "
+                    "Completing these steps makes you competitive for "
+                    "this role."
+                )
                 for i, step in enumerate(
                     gap_result.get("recommended_first_steps", []), 1
                 ):
