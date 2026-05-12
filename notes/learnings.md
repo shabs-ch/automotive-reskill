@@ -206,3 +206,54 @@
   handles skill standardisation gracefully without it.
   ESCO ingest script kept for potential v2 use (multilingual 
   skill standardisation) but not in current pipeline.
+
+- **Day 14**: First 30-min review with 1 user surfaced 6 real 
+  problems missed during solo development. Most impactful: 
+  section labels unclear, raw snippet not useful, dropdown 
+  showing irrelevant families. Nielsen Norman principle: 
+  5 users find 80% of issues — 4 more tests scheduled Week 7.
+
+  ## Days 16-17 — Evaluation Framework
+
+**Eval-driven development in practice:**
+- Built 15 hand-graded test cases before optimising anything
+- Baseline: classification 67%, gap analysis 40%
+- After 2 iterations: classification 87%, gap analysis 87%
+- Without the eval set, prompt changes would have been guesses
+
+**Always inspect raw model output before concluding model is wrong:**
+- need_to_learn = 0% looked like gap analyzer failure
+- Actual cause: scorer using exact string matching, Claude using 
+  different but correct wording
+- Lesson: diagnose before fixing. The model was right, the test was wrong.
+
+**Fuzzy matching beats exact matching for LLM output evaluation:**
+- "AI and ML fundamentals" ≠ "AI fundamentals" by exact match
+- 50% word overlap threshold catches semantically equivalent outputs
+- LLMs paraphrase — eval scorers must account for this
+
+**Prompt calibration is iterative, not one-shot:**
+- First prompt: TPM profiles scored "strong" (wrong)
+- Added readiness calibration rules: fixed to "moderate"
+- First classifier: ISO 26262 triggered ml_test (wrong)
+- Added disambiguation rules: fixed to ml_engineer/mlops
+- Each fix was evidence-based — a failing test case, not a hunch
+
+**Test with real extracted profiles, not simplified fixtures:**
+- TC002 passed standalone test at 0.52 (below threshold)
+- Same profile scored 0.72 in live app (above threshold)
+- Extracted profile richer than handcrafted fixture
+- Always run end-to-end before declaring a component working
+
+**Eval set design insights:**
+- Expected outputs need domain expertise — not just technical knowledge
+- Too specific = brittle (fails on wording variation)
+- Too generic = meaningless (everything passes)
+- Right level: concept keywords, not exact phrases
+- Stopping criteria matter — 87% is good enough, further iteration 
+  risks overfitting to 15 cases
+
+**Cost insight:**
+- Full pipeline per user: ~$0.033 (classification + gap analysis)
+- 15 eval cases: $0.49 total
+- At $0.033/run, 1000 users/month = $33 — very manageable
