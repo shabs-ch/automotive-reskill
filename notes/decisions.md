@@ -230,3 +230,26 @@ will enrich after Day 18 course corpus is built.
 click due to Streamlit's synchronous re-render cycle. Not fixable 
 without async architecture. Acceptable for v1 — user sees spinner 
 within 1-2 seconds of clicking.
+
+## Days 16-17
+
+**Eval framework**: 15 hand-graded test cases across 6 archetypes.
+Baseline: classification 67%, gap analysis 40%.
+After iteration: classification 87%, gap analysis 87%.
+
+**Key learnings from eval**:
+**Eval scorer bug**: String matching too strict — Claude returns 
+correct skills with different wording than expected keywords.
+Example: Claude returns "AI and ML fundamentals" but scorer 
+expected "AI fundamentals" — no match despite correct content.
+Fix: fuzzy skill_matches() using 50% word overlap threshold.
+Symptom was need_to_learn = 0% across multiple cases — looked 
+like gap analyzer failing but was actually scorer failing.
+Lesson: always inspect raw Claude output before concluding 
+the model is wrong.
+
+**Stopping criteria**: 87/87 is above plan target of "measurably 
+improved." Further iteration risks overfitting to 15 cases.
+Next iteration after Week 7 user testing adds new failure cases.
+
+**Cost**: $0.033 per full pipeline run (classification + gap analysis)

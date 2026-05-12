@@ -43,3 +43,8 @@ produced better ontology for AI/ML skills. Potential v2 use:
 skill label standardisation (mapping messy CV text to canonical 
 ESCO labels) and German↔English skill equivalence for multilingual
 CV processing.
+
+## Eval set enrichment (v2)
+Consider enriching expected outputs in test cases with specific 
+skill requirements from job ads corpus — would make eval more 
+precise but also more brittle. Revisit after Day 17 diagnosis.
