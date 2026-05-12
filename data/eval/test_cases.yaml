@@ -1,0 +1,801 @@
+# Automotive Reskill — Evaluation Test Cases
+# Format: input profile + expected outputs
+# Used by: tests/eval_runner.py
+# Last updated: Week 4, Day 16
+
+metadata:
+  version: "1.0"
+  total_cases: 15
+  archetypes: 6
+  graded_by: "domain expert (project author)"
+  last_graded: "2026-05-08"
+
+test_cases:
+
+  # ── ARCHETYPE 1: Embedded SW Engineer (junior-mid) ──────────────
+  - id: "TC001"
+    description: "Junior embedded SW engineer, AUTOSAR heavy, 5 years"
+    profile:
+      technical_skills:
+        Embedded Software:
+          - AUTOSAR Classic Platform
+          - embedded C
+          - RTOS fundamentals
+          - CAN bus
+          - LIN protocol
+        Software Development:
+          - requirements engineering
+          - unit testing
+          - code review
+      domain_knowledge:
+        Automotive:
+          - ECU software development
+          - body control modules
+          - powertrain systems
+      tools:
+        - Vector CANoe
+        - DOORS
+        - MATLAB
+        - Git
+      transferable_skills:
+        - Requirements-based development
+        - Safety-critical mindset
+        - Structured problem solving
+      years_experience_per_area:
+        embedded SW development: 5
+        AUTOSAR: 4
+
+    expected:
+      top_role_families:
+        - ml_engineer
+        - mlops_engineer
+      should_appear_in_already_have:
+        - embedded C
+        - AUTOSAR
+        - requirements engineering
+        - safety-critical mindset
+      should_appear_in_need_to_learn:
+        - Python
+        - PyTorch
+        - machine learning fundamentals
+      expected_readiness: early
+      domain_preference: automotive_adjacent
+
+  - id: "TC002"
+    description: "Mid embedded SW engineer, AUTOSAR heavy, 8 years"
+    profile:
+      technical_skills:
+        Embedded Software:
+          - AUTOSAR Classic Platform
+          - AUTOSAR Adaptive Platform
+          - embedded C
+          - C++
+          - RTOS (QNX)
+          - CAN bus
+          - Ethernet automotive
+        Software Development:
+          - CI/CD basics
+          - unit testing
+          - static code analysis
+      domain_knowledge:
+        Automotive:
+          - ECU software development
+          - functional safety ISO 26262
+          - ASPICE process
+      tools:
+        - Vector CANoe
+        - Vector DaVinci
+        - DOORS
+        - MATLAB/Simulink
+        - Jenkins
+      transferable_skills:
+        - Safety-critical software development
+        - Requirements engineering
+        - Cross-team collaboration
+      years_experience_per_area:
+        embedded SW: 8
+        AUTOSAR: 6
+        functional safety: 3
+
+    expected:
+      top_role_families:
+        - ml_engineer
+        - mlops_engineer
+      should_appear_in_already_have:
+        - AUTOSAR
+        - ISO 26262
+        - C++
+        - CI/CD
+        - safety-critical development
+      should_appear_in_need_to_learn:
+        - Python
+        - PyTorch
+        - ML fundamentals
+      expected_readiness: moderate
+      domain_preference: automotive_adjacent
+
+  # ── ARCHETYPE 2: Senior Embedded SW Engineer (integration/CI/CD) ─
+
+  - id: "TC003"
+    description: "Senior embedded SW, integration and CI/CD focus, 15 years"
+    profile:
+      technical_skills:
+        Embedded Software:
+          - embedded C
+          - C++
+          - AUTOSAR Classic
+          - system integration
+        DevOps & Infrastructure:
+          - CI/CD pipelines
+          - Jenkins
+          - Docker basics
+          - Git
+          - Linux
+        Software Development:
+          - software architecture
+          - code review
+          - test automation
+      domain_knowledge:
+        Automotive:
+          - ECU integration
+          - HIL testing
+          - release management
+          - ASPICE
+      tools:
+        - Jenkins
+        - Docker
+        - CANoe
+        - MATLAB
+        - JIRA
+      transferable_skills:
+        - System integration across multiple teams
+        - Release management and delivery
+        - Test automation mindset
+        - Cross-functional coordination
+      years_experience_per_area:
+        embedded SW: 15
+        CI/CD and DevOps: 5
+        system integration: 8
+
+    expected:
+      top_role_families:
+        - mlops_engineer
+        - ml_engineer
+      should_appear_in_already_have:
+        - CI/CD pipelines
+        - Docker
+        - system integration
+        - Linux
+        - test automation
+      should_appear_in_need_to_learn:
+        - Python
+        - Kubernetes
+        - ML pipeline orchestration
+        - model monitoring
+      expected_readiness: moderate
+      domain_preference: both
+
+  - id: "TC004"
+    description: "Senior embedded SW, strong CI/CD, Python exposure, 15 years"
+    profile:
+      technical_skills:
+        Embedded Software:
+          - embedded C
+          - C++
+          - AUTOSAR Classic
+        DevOps & Infrastructure:
+          - CI/CD pipelines
+          - Jenkins
+          - Docker
+          - Kubernetes basics
+          - Linux
+          - Python scripting
+        Software Development:
+          - software architecture
+          - test automation
+          - code review
+      domain_knowledge:
+        Automotive:
+          - ECU integration
+          - release management
+          - ASPICE
+          - ISO 26262
+      tools:
+        - Jenkins
+        - Docker
+        - Kubernetes
+        - Python
+        - Git
+      transferable_skills:
+        - Infrastructure ownership
+        - Release management
+        - Cross-functional delivery
+        - Safety-critical deployment mindset
+      years_experience_per_area:
+        embedded SW: 15
+        CI/CD: 7
+        Python: 3
+
+    expected:
+      top_role_families:
+        - mlops_engineer
+      should_appear_in_already_have:
+        - CI/CD pipelines
+        - Docker
+        - Kubernetes
+        - Python
+        - ISO 26262
+        - safety-critical deployment
+      should_appear_in_need_to_learn:
+        - MLflow
+        - model monitoring
+        - ML pipeline orchestration
+      expected_readiness: moderate
+      domain_preference: both
+
+  # ── ARCHETYPE 3: TPM / PMO Lead ──────────────────────────────────
+
+  - id: "TC005"
+    description: "Senior TPM, 20 years, no coding, ADAS delivery"
+    profile:
+      technical_skills:
+        Program Management:
+          - program planning and tracking
+          - risk management
+          - agile delivery
+          - gate reviews
+      domain_knowledge:
+        Automotive Program Management:
+          - ADAS program delivery
+          - cross-functional leadership
+          - OEM stakeholder management
+          - supplier management
+          - ASPICE governance
+      tools:
+        - MS Project
+        - JIRA
+        - Confluence
+        - DOORS
+      transferable_skills:
+        - Cross-functional program leadership
+        - Stakeholder management shop floor to C-suite
+        - Change management and process redesign
+        - Risk management and delivery predictability
+        - OEM and Tier-1 relationship management
+      years_experience_per_area:
+        program management: 20
+        ADAS delivery: 8
+        agile delivery: 5
+
+    expected:
+      top_role_families:
+        - ai_mngr
+      should_appear_in_already_have:
+        - stakeholder management
+        - program management
+        - agile delivery
+        - risk management
+        - OEM relationships
+      should_appear_in_need_to_learn:
+        - AI fundamentals
+        - LLMs
+        - EU AI Act basics
+      expected_readiness: moderate
+      domain_preference: automotive_adjacent
+
+  - id: "TC006"
+    description: "PMO Lead, 20 years, Executive MBA, cross-domain open"
+    profile:
+      technical_skills:
+        Program Management:
+          - program planning
+          - OKR tracking
+          - risk management
+          - agile methods
+          - change management
+      domain_knowledge:
+        Automotive Leadership:
+          - cross-functional program leadership
+          - stakeholder management
+          - business development
+          - process redesign
+          - supplier governance
+        Business:
+          - digital transformation
+          - innovation management
+          - strategic planning
+      tools:
+        - MS Project
+        - JIRA
+        - Power BI
+        - Excel
+      transferable_skills:
+        - Cross-functional program leadership across 3 sites
+        - Stakeholder management from shop floor to C-suite
+        - Change management and AI adoption readiness
+        - Business development and customer engagement
+        - Coaching and team development
+      years_experience_per_area:
+        program management: 20
+        business development: 8
+        digital transformation: 3
+
+    expected:
+      top_role_families:
+        - ai_mngr
+      should_appear_in_already_have:
+        - cross-functional leadership
+        - stakeholder management
+        - change management
+        - OKR tracking
+        - digital transformation
+      should_appear_in_need_to_learn:
+        - AI fundamentals
+        - LLMs working knowledge
+        - EU AI Act
+        - GenAI use case evaluation
+      expected_readiness: moderate
+      domain_preference: both
+
+  - id: "TC007"
+    description: "TPM, 20 years, Python exposure, ADAS and EPS delivery"
+    profile:
+      technical_skills:
+        Program Management:
+          - program planning
+          - agile delivery
+          - CI/CD introduction
+          - risk management
+        Technical:
+          - Python scripting basics
+          - MATLAB exposure
+          - embedded SW awareness
+      domain_knowledge:
+        Automotive:
+          - ADAS software delivery
+          - EPS systems
+          - steer-by-wire
+          - OEM program management
+          - ASPICE
+          - ISO 26262 awareness
+      tools:
+        - Python
+        - MATLAB
+        - JIRA
+        - Vector tools
+        - dSPACE
+      transferable_skills:
+        - Technical program leadership
+        - Stakeholder management
+        - Change management
+        - Cross-functional delivery
+        - Business development
+      years_experience_per_area:
+        program management: 20
+        ADAS delivery: 8
+        Python: 2
+
+    expected:
+      top_role_families:
+        - ai_mngr
+      should_appear_in_already_have:
+        - stakeholder management
+        - agile delivery
+        - ISO 26262 awareness
+        - Python basics
+        - CI/CD introduction
+      should_appear_in_need_to_learn:
+        - AI fundamentals
+        - LLMs
+        - ML pipeline concepts
+      expected_readiness: moderate
+      domain_preference: both
+
+  # ── ARCHETYPE 4: Test/Validation Engineer ────────────────────────
+
+  - id: "TC008"
+    description: "Test engineer, 5 years, HIL/SIL focus"
+    profile:
+      technical_skills:
+        Testing & Validation:
+          - HIL testing
+          - SIL testing
+          - requirements-based testing
+          - test case design
+        Automotive Testing:
+          - functional testing
+          - regression testing
+          - defect tracking
+      domain_knowledge:
+        Automotive Testing:
+          - ECU validation
+          - powertrain testing
+          - ASPICE test processes
+      tools:
+        - dSPACE
+        - CANoe
+        - DOORS
+        - MATLAB
+      transferable_skills:
+        - Requirements-based test case design
+        - Root cause analysis
+        - Defect tracking and resolution
+      years_experience_per_area:
+        automotive testing: 5
+        HIL/SIL: 4
+
+    expected:
+      top_role_families:
+        - ml_test
+      should_appear_in_already_have:
+        - HIL testing
+        - requirements-based testing
+        - root cause analysis
+        - defect tracking
+      should_appear_in_need_to_learn:
+        - Python
+        - ML evaluation metrics
+        - simulation-based ML testing
+      expected_readiness: moderate
+      domain_preference: automotive_adjacent
+
+  - id: "TC009"
+    description: "Senior test engineer, 10 years, HIL/SIL, ISO 26262"
+    profile:
+      technical_skills:
+        Testing & Validation:
+          - HIL testing
+          - SIL testing
+          - ISO 26262 testing
+          - SOTIF awareness
+          - scenario-based testing
+          - test automation
+        Software:
+          - Python scripting
+          - MATLAB scripting
+      domain_knowledge:
+        Automotive Testing:
+          - ADAS validation
+          - functional safety testing
+          - ASPICE test processes
+          - defect management
+      tools:
+        - dSPACE
+        - CANoe
+        - DOORS
+        - Python
+        - MATLAB
+        - JIRA
+      transferable_skills:
+        - Scenario-based test design
+        - ISO 26262 safety testing
+        - Requirements traceability
+        - Root cause analysis
+        - Cross-functional test coordination
+      years_experience_per_area:
+        automotive testing: 10
+        HIL/SIL: 8
+        ISO 26262 testing: 5
+        Python scripting: 3
+
+    expected:
+      top_role_families:
+        - ml_test
+      should_appear_in_already_have:
+        - HIL/SIL testing
+        - ISO 26262
+        - SOTIF awareness
+        - scenario-based testing
+        - Python scripting
+      should_appear_in_need_to_learn:
+        - ML evaluation metrics
+        - CARLA
+        - CI/CD
+      expected_readiness: moderate
+      domain_preference: automotive_adjacent
+
+  # ── ARCHETYPE 5: Software Architect ──────────────────────────────
+
+  - id: "TC010"
+    description: "SW Architect, 10 years, AUTOSAR, Rhapsody, DaVinci"
+    profile:
+      technical_skills:
+        Software Architecture:
+          - AUTOSAR Classic Platform
+          - software component design
+          - interface definition
+          - model-based development
+        Development Tools:
+          - IBM Rhapsody
+          - Vector DaVinci Developer
+          - embedded C
+          - C++
+      domain_knowledge:
+        Automotive Architecture:
+          - ECU software architecture
+          - AUTOSAR layered architecture
+          - SOME/IP
+          - CAN/Ethernet automotive
+          - ISO 26262 architecture
+      tools:
+        - IBM Rhapsody
+        - Vector DaVinci Developer
+        - CANoe
+        - DOORS
+        - MATLAB/Simulink
+      transferable_skills:
+        - System architecture design
+        - Interface definition and API design
+        - Requirements decomposition
+        - Safety-critical design patterns
+      years_experience_per_area:
+        software architecture: 10
+        AUTOSAR: 8
+        model-based development: 6
+
+    expected:
+      top_role_families:
+        - mlops_engineer
+        - ml_engineer
+      should_appear_in_already_have:
+        - software architecture
+        - AUTOSAR
+        - ISO 26262
+        - interface design
+        - C++
+      should_appear_in_need_to_learn:
+        - Python
+        - ML fundamentals
+        - cloud architecture
+        - microservices
+      expected_readiness: early
+      domain_preference: automotive_adjacent
+
+  - id: "TC011"
+    description: "Senior SW Architect, 15 years, AUTOSAR, cloud exposure"
+    profile:
+      technical_skills:
+        Software Architecture:
+          - AUTOSAR Classic and Adaptive
+          - microservices architecture
+          - API design
+          - service-oriented architecture
+          - SOME/IP
+        Cloud & Modern Stack:
+          - Docker basics
+          - cloud architecture awareness
+          - Python scripting
+          - CI/CD awareness
+      domain_knowledge:
+        Automotive Architecture:
+          - vehicle software architecture
+          - ISO 26262 architecture
+          - ASPICE
+          - SDV transition awareness
+      tools:
+        - IBM Rhapsody
+        - Vector DaVinci
+        - Docker
+        - Python
+        - Git
+      transferable_skills:
+        - Large-scale system architecture
+        - API and interface design
+        - Safety-critical design
+        - Cross-team technical leadership
+        - Requirements decomposition
+      years_experience_per_area:
+        software architecture: 15
+        AUTOSAR: 10
+        cloud/modern stack: 3
+
+    expected:
+      top_role_families:
+        - mlops_engineer
+      should_appear_in_already_have:
+        - microservices architecture
+        - API design
+        - Docker
+        - ISO 26262
+        - Python scripting
+        - CI/CD awareness
+      should_appear_in_need_to_learn:
+        - Kubernetes
+        - ML pipeline architecture
+        - model monitoring
+      expected_readiness: moderate
+      domain_preference: both
+
+  # ── ARCHETYPE 6: Systems Engineer ────────────────────────────────
+
+  - id: "TC012"
+    description: "Systems engineer, 10 years, requirements and architecture"
+    profile:
+      technical_skills:
+        Systems Engineering:
+          - system requirements analysis
+          - system architecture definition
+          - interface management
+          - MBSE basics
+        Software Awareness:
+          - embedded SW awareness
+          - model-based development awareness
+      domain_knowledge:
+        Automotive Systems:
+          - ADAS systems architecture
+          - vehicle dynamics systems
+          - functional safety ISO 26262
+          - ASPICE system engineering
+          - V-model development
+      tools:
+        - DOORS
+        - Rhapsody
+        - MATLAB/Simulink
+        - Enterprise Architect
+      transferable_skills:
+        - System requirements decomposition
+        - Interface definition and management
+        - Stakeholder requirements elicitation
+        - Safety analysis (FMEA, FTA)
+        - V-model process discipline
+      years_experience_per_area:
+        systems engineering: 10
+        requirements analysis: 8
+        functional safety: 4
+
+    expected:
+      top_role_families:
+        - ai_mngr
+        - mlops_engineer
+      should_appear_in_already_have:
+        - requirements analysis
+        - system architecture
+        - ISO 26262
+        - stakeholder elicitation
+        - safety analysis
+      should_appear_in_need_to_learn:
+        - Python
+        - ML fundamentals
+        - AI use case specification
+      expected_readiness: early
+      domain_preference: both
+
+  - id: "TC013"
+    description: "Senior systems engineer, 12 years, MBSE, Python"
+    profile:
+      technical_skills:
+        Systems Engineering:
+          - system requirements analysis
+          - MBSE (SysML)
+          - system architecture
+          - interface management
+          - simulation
+        Software:
+          - Python scripting
+          - MATLAB/Simulink
+          - model-based development
+      domain_knowledge:
+        Automotive Systems:
+          - ADAS systems
+          - autonomous driving architecture
+          - ISO 26262
+          - SOTIF awareness
+          - ASPICE
+      tools:
+        - Enterprise Architect
+        - DOORS
+        - Python
+        - MATLAB/Simulink
+        - Rhapsody
+      transferable_skills:
+        - System architecture and decomposition
+        - Requirements engineering
+        - Safety analysis
+        - Simulation and modelling
+        - Cross-functional technical coordination
+      years_experience_per_area:
+        systems engineering: 12
+        MBSE: 5
+        Python: 4
+        autonomous driving: 3
+
+    expected:
+      top_role_families:
+        - mlops_engineer 
+        - ai_mngr
+      should_appear_in_already_have:
+        - Python
+        - simulation and modelling
+        - requirements engineering
+        - SOTIF awareness
+        - ISO 26262
+      should_appear_in_need_to_learn:
+        - PyTorch
+        - ML fundamentals
+        - data engineering
+      expected_readiness: moderate
+      domain_preference: both
+
+  - id: "TC014"
+    description: "Systems engineer, 10 years, requirements focus, no coding"
+    profile:
+      technical_skills:
+        Systems Engineering:
+          - system requirements analysis
+          - system architecture
+          - interface management
+          - hazard analysis
+      domain_knowledge:
+        Automotive Systems:
+          - body control systems
+          - functional safety ISO 26262
+          - ASPICE
+          - V-model
+      tools:
+        - DOORS
+        - Enterprise Architect
+        - MS Office
+      transferable_skills:
+        - Requirements elicitation and decomposition
+        - Stakeholder management
+        - Safety analysis (FMEA, HARA)
+        - Process discipline
+        - Technical documentation
+      years_experience_per_area:
+        systems engineering: 10
+        requirements analysis: 9
+        functional safety: 5
+
+    expected:
+      top_role_families:
+        - ai_mngr
+      should_appear_in_already_have:
+        - requirements analysis
+        - stakeholder management
+        - ISO 26262
+        - safety analysis
+        - process discipline
+      should_appear_in_need_to_learn:
+        - Python basics
+        - AI fundamentals
+        - ML concepts for managers
+        - EU AI Act
+      expected_readiness: early
+      domain_preference: cross_domain
+
+  - id: "TC015"
+    description: "Junior systems engineer, 3 years, requirements only"
+    profile:
+      technical_skills:
+        Systems Engineering:
+          - system requirements writing
+          - interface definition basics
+          - V-model awareness
+      domain_knowledge:
+        Automotive Systems:
+          - powertrain systems awareness
+          - ASPICE basics
+      tools:
+        - DOORS
+        - MS Office
+      transferable_skills:
+        - Structured requirements writing
+        - Attention to detail
+        - Process compliance
+      years_experience_per_area:
+        systems engineering: 3
+        requirements: 3
+
+    expected:
+      top_role_families: []
+      low_confidence: true
+      should_appear_in_already_have:
+        - requirements writing
+        - process compliance
+      should_appear_in_need_to_learn:
+        - Python
+        - AI fundamentals
+        - ML basics
+      expected_readiness: early
+      notes: "Junior profile — expect low confidence across all families"
+      domain_preference: both

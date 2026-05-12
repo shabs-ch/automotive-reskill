@@ -95,9 +95,24 @@ IMPORTANT CALIBRATION RULES:
   or strong embedded/signal processing background.
 - ml_test requires testing/validation background — HIL/SIL, test automation,
   or quality engineering experience.
-- mlops_engineer requires infrastructure/DevOps/cloud background.
+- mlops_engineer requires infrastructure/DevOps/cloud background —
+  CI/CD pipelines, Docker, Kubernetes, or cloud platforms are strong 
+  signals. Embedded SW engineers with CI/CD experience should score 
+  higher here than pure coding profiles without infrastructure exposure.
 - Be honest about junior profiles — low scores across all families 
   is a valid and correct output if the profile is early career.
+- ISO 26262 and ASPICE knowledge in an embedded SW or architecture 
+  context signals ml_engineer or mlops_engineer — NOT ai_mngr or ml_test.
+  Only classify as ai_mngr if there is explicit program/product 
+  management experience. Only classify as ml_test if there is explicit 
+  test/validation engineering experience.
+- C++ and embedded C are strong ml_engineer signals — prioritise 
+  these over soft signals like process knowledge.
+- Software architects and systems engineers with cloud, Docker, 
+  or CI/CD exposure should score higher for mlops_engineer — 
+  their architecture background maps well to ML platform design.
+- MBSE, SysML, and system architecture are NOT ml_test signals —
+  they map to ml_engineer or mlops_engineer.
   
 ENGINEER PROFILE:
 {profile_text}

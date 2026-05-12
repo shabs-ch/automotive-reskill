@@ -156,6 +156,23 @@ Rules:
 - recommended_first_steps should be ordered by priority
 - maximum 6 items in already_have, 5 in transfers_with_bridging, 
   6 in need_to_learn, 5 in recommended_first_steps
+
+Readiness calibration — be strict:
+- strong: ONLY if Python proficient + CI/CD experience + 
+  some ML/AI exposure + domain expertise. ALL four required.
+  Strong leadership alone does NOT qualify as strong readiness.
+- moderate: Strong transferable skills + some technical overlap
+  (CI/CD OR Python OR cloud) but missing core ML stack.
+  TPM/PMO profiles with excellent leadership but no coding = moderate.
+  Test engineers with HIL/SIL but no Python = moderate.
+- early: Missing Python AND ML basics AND CI/CD. 
+  Needs 6-12 months focused upskilling.
+- When in doubt between strong and moderate — choose moderate.
+  Overconfident readiness assessment is worse than conservative.
+- need_to_learn must always contain at least 3 items for early 
+  and moderate profiles. Automotive engineers transitioning to AI 
+  always have gaps — minimum gaps are Python ecosystem, ML tooling, 
+  or cloud infrastructure. If you identify fewer than 3, look harder.
 """
 
     message = client.messages.create(
