@@ -36,6 +36,12 @@ if "skills" not in st.session_state:
     st.session_state.skills = None
 if "total_cost" not in st.session_state:
     st.session_state.total_cost = 0.0
+if "gap_result" not in st.session_state:
+    st.session_state.gap_result = None
+if "gap_family" not in st.session_state:
+    st.session_state.gap_family = None
+if "roadmap" not in st.session_state:
+    st.session_state.roadmap = None
 
 # ── Screen 1: CV Input ───────────────────────────────────────────
 st.header("Step 1 — Your Profile")
@@ -250,93 +256,210 @@ if st.session_state.skills:
             "This takes 20-30 seconds..."
         ):
             from src.gap_analyzer import analyze_gap
-
             gap_result = analyze_gap(
                 skills_profile=skills,
                 target_role_family=selected_family,
                 domain_preference=domain_map[domain_filter] or "both"
             )
+            st.session_state.gap_result = gap_result
+            st.session_state.gap_family = selected_family
+            tokens = gap_result.get("_tokens", {})
+            st.session_state.total_cost += tokens.get("cost_usd", 0)
 
-            if "error" in gap_result:
-                st.error(f"Gap analysis failed: {gap_result['error']}")
-            else:
-                # Already Have
-                st.subheader("✅ You Already Have")
-                st.caption(
-                    "Skills from your automotive background that are "
-                    "directly valued in this AI role — these are your "
-                    "strengths. Highlight them in applications."
+    # Display gap results from session state
+    if st.session_state.gap_result and \
+       "error" not in st.session_state.gap_result:
+
+        gap_result = st.session_state.gap_result
+
+        # ── Already Have ─────────────────────────────────────
+        st.subheader("✅ You Already Have")
+        st.caption(
+            "Skills from your automotive background that are "
+            "directly valued in this AI role — these are your "
+            "strengths. Highlight them in applications."
+        )
+        for item in gap_result.get("already_have", []):
+            with st.expander(
+                f"{item['skill']} — {item['strength'].upper()}"
+            ):
+                st.write(item["relevance"])
+
+        # ── Transfers With Bridging ───────────────────────────
+        st.subheader("↗️ Transfers With Bridging")
+        st.caption(
+            "Skills you already have that map to AI role "
+            "requirements with a specific learning step to "
+            "activate the connection. Foundation exists — "
+            "just needs targeted upskilling."
+        )
+        for item in gap_result.get("transfers_with_bridging", []):
+            with st.expander(
+                f"{item['current_skill']} → {item['target_skill']} "
+                f"({item['effort']})"
+            ):
+                st.write(f"**Bridge action**: {item['bridge_action']}")
+
+        # ── Need To Learn ────────────────────────────────────
+        st.subheader("⬆️ You Need To Learn")
+        st.caption(
+            "Skills genuinely absent from your profile that "
+            "this role requires. These are your real gaps — "
+            "not covered by any existing skill you have."
+        )
+        for item in gap_result.get("need_to_learn", []):
+            priority_color = {
+                "high": "🔴",
+                "medium": "🟡",
+                "low": "🟢"
+            }.get(item["priority"], "⚪")
+            st.markdown(
+                f"{priority_color} **{item['skill']}** "
+                f"— {item['reason']}"
+            )
+
+        # ── First Steps ───────────────────────────────────────
+        st.subheader("🌉 Recommended First Steps")
+        st.caption(
+            "A prioritised action plan: activate your transfers "
+            "first (quickest wins), then close genuine gaps. "
+            "Completing these steps makes you competitive for "
+            "this role."
+        )
+        for i, step in enumerate(
+            gap_result.get("recommended_first_steps", []), 1
+        ):
+            st.markdown(f"**{i}.** {step}")
+
+        # ── Readiness ─────────────────────────────────────────
+        readiness = gap_result.get("overall_readiness", "")
+        readiness_color = {
+            "strong": "🟢",
+            "moderate": "🟡",
+            "early": "🔴"
+        }.get(readiness, "⚪")
+
+        st.divider()
+        st.subheader(
+            f"📊 Overall Readiness: "
+            f"{readiness_color} {readiness.upper()}"
+        )
+        st.info(gap_result.get("readiness_summary", ""))
+
+        # ── Screen 5: Learning Roadmap ────────────────────────
+        st.divider()
+        st.header("Step 5 — Your Learning Roadmap")
+
+        if st.button("Generate My Roadmap", type="primary"):
+            with st.spinner(
+                "Building your personalised roadmap — "
+                "matching courses to your gaps. "
+                "Takes 30-40 seconds..."
+            ):
+                from src.roadmap_generator import generate_roadmap
+                roadmap = generate_roadmap(
+                    skills_profile=skills,
+                    gap_report=gap_result,
+                    target_role_family=st.session_state.gap_family,
+                    domain_preference=domain_map[domain_filter] or "both"
                 )
-                for item in gap_result.get("already_have", []):
-                    with st.expander(
-                        f"{item['skill']} — {item['strength'].upper()}"
-                    ):
-                        st.write(item["relevance"])
-
-                # Transfers With Bridging
-                st.subheader("↗️ Transfers With Bridging")
-                st.caption(
-                    "Skills you already have that map to AI role "
-                    "requirements with a specific learning step to "
-                    "activate the connection. Foundation exists — "
-                    "just needs targeted upskilling."
-                )
-                for item in gap_result.get("transfers_with_bridging", []):
-                    with st.expander(
-                        f"{item['current_skill']} → {item['target_skill']} "
-                        f"({item['effort']})"
-                    ):
-                        st.write(f"**Bridge action**: {item['bridge_action']}")
-
-                # Need To Learn
-                st.subheader("⬆️ You Need To Learn")
-                st.caption(
-                    "Skills genuinely absent from your profile that "
-                    "this role requires. These are your real gaps — "
-                    "not covered by any existing skill you have."
-                )
-                for item in gap_result.get("need_to_learn", []):
-                    priority_color = {
-                        "high": "🔴",
-                        "medium": "🟡",
-                        "low": "🟢"
-                    }.get(item["priority"], "⚪")
-                    st.markdown(
-                        f"{priority_color} **{item['skill']}** "
-                        f"— {item['reason']}"
-                    )
-
-                # First Steps
-                st.subheader("🌉 Recommended First Steps")
-                st.caption(
-                    "A prioritised action plan: activate your transfers "
-                    "first (quickest wins), then close genuine gaps. "
-                    "Completing these steps makes you competitive for "
-                    "this role."
-                )
-                for i, step in enumerate(
-                    gap_result.get("recommended_first_steps", []), 1
-                ):
-                    st.markdown(f"**{i}.** {step}")
-
-                # Readiness
-                readiness = gap_result.get("overall_readiness", "")
-                readiness_color = {
-                    "strong": "🟢",
-                    "moderate": "🟡",
-                    "early": "🔴"
-                }.get(readiness, "⚪")
-
-                st.divider()
-                st.subheader(
-                    f"📊 Overall Readiness: "
-                    f"{readiness_color} {readiness.upper()}"
-                )
-                st.info(gap_result.get("readiness_summary", ""))
-
-                # Cost tracking
-                tokens = gap_result.get("_tokens", {})
+                st.session_state.roadmap = roadmap
+                tokens = roadmap.get("_tokens", {})
                 st.session_state.total_cost += tokens.get("cost_usd", 0)
+
+        # Display roadmap from session state
+        if "roadmap" in st.session_state and \
+           st.session_state.roadmap and \
+           "error" not in st.session_state.roadmap:
+
+            roadmap = st.session_state.roadmap
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric(
+                    "Total Duration",
+                    f"{roadmap.get('total_duration_months', '?')} months"
+                )
+            with col2:
+                st.metric(
+                    "Estimated Cost",
+                    roadmap.get('estimated_cost_eur', 'Unknown')
+                )
+
+            for month in roadmap.get("monthly_plan", []):
+                st.subheader(
+                    f"{month['month']} — {month['theme']}"
+                )
+                for course in month.get("courses", []):
+                    bg = course.get(
+                        "bildungsgutschein_eligible", "unknown"
+                    )
+                    bg_tag = "✅ BG-eligible" if bg == "yes" else \
+                             "❌ Not BG-eligible" if bg == "no" else \
+                             "❓ Verify BG eligibility"
+
+                    with st.expander(
+                        f"{course['name']} — "
+                        f"{course.get('provider', '')} "
+                        f"[{course.get('priority', '').upper()}]"
+                    ):
+                        st.markdown(
+                            f"**Why recommended**: "
+                            f"{course['why_recommended']}"
+                        )
+                        col1, col2, col3 = st.columns(3)
+                        with col1:
+                            st.caption(
+                                f"📅 {course.get('duration_weeks', '?')} weeks"
+                            )
+                        with col2:
+                            cost = course.get('cost_eur')
+                            audit = course.get('cost_audit_eur')
+                            if audit == 0:
+                                st.caption("💰 Free audit available")
+                            elif cost:
+                                st.caption(f"💰 €{cost}")
+                            else:
+                                st.caption("💰 Price unknown")
+                        with col3:
+                            st.caption(f"{bg_tag}")
+
+                        if course.get("url"):
+                            st.markdown(
+                                f"[🔗 Course link]({course['url']})"
+                            )
+
+                st.success(
+                    f"🎯 Milestone: {month.get('milestone', '')}"
+                )
+
+            st.divider()
+            st.subheader("📁 Portfolio Project")
+            proj = roadmap.get("portfolio_project", {})
+            st.markdown(f"**{proj.get('title', '')}**")
+            st.write(proj.get("description", ""))
+            st.info(
+                f"🚗 Automotive connection: "
+                f"{proj.get('automotive_connection', '')}"
+            )
+
+            bg_courses = roadmap.get("bg_eligible_courses", [])
+            if bg_courses:
+                st.divider()
+                st.subheader("✅ BG-Eligible Courses in Your Roadmap")
+                for course in bg_courses:
+                    st.markdown(f"- {course}")
+                st.caption(
+                    "Verify current eligibility with "
+                    "Arbeitsagentur before applying."
+                )
+
+            st.divider()
+            st.info(roadmap.get("roadmap_summary", ""))
+
+            # Cost tracking
+            tokens = roadmap.get("_tokens", {})
+            st.session_state.total_cost += tokens.get("cost_usd", 0)
 
     # ── Cost tracker ─────────────────────────────────────────────
     st.divider()
