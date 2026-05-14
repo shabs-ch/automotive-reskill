@@ -253,3 +253,41 @@ improved." Further iteration risks overfitting to 15 cases.
 Next iteration after Week 7 user testing adds new failure cases.
 
 **Cost**: $0.033 per full pipeline run (classification + gap analysis)
+
+## Day 18
+
+**Course corpus**: 84 unique courses, 127 family assignments.
+Sources: IHK WIS, Fraunhofer, Coursera, DeepLearning.AI, 
+fast.ai, LinkedIn Learning, Udacity, DataCamp.
+
+**BG eligibility**: Only 5 confirmed yes, 58 no, 21 unknown.
+Most online platforms not AZAV-certified → not BG-eligible.
+German IHK/Fraunhofer courses marked unknown pending Day 22.
+
+**Language**: 50 EN / 27 DE / 6 DE/EN / 1 Unknown.
+English courses dominate — validates Person B's interview finding
+that BG-eligible courses are mostly German.
+
+**Language standardisation**: DE/EN for bilingual courses.
+Extra language detail moved to notes field.
+
+## Day 19
+
+**Roadmap generator**: Full RAG implementation complete.
+Retrieval: keyword + BG eligibility scoring against course corpus.
+Augmentation: top 20 relevant courses passed to Claude prompt.
+Generation: Claude generates month-by-month plan citing ONLY 
+real courses from corpus.
+
+**Hallucination prevention**: CRITICAL RULES in prompt enforce
+exact course name/URL copying. Claude flagged missing coverage
+honestly rather than inventing courses — RAG working correctly.
+
+**Session state**: gap_result and roadmap stored in 
+st.session_state — prevents clearing on button re-click.
+
+**Cost per full pipeline run**: ~$0.05-0.08 
+(classification + gap analysis + roadmap generation)
+
+**RAG completion**: Day 9 = retrieval working. Day 19 = 
+generation grounded in retrieval. Loop closed.

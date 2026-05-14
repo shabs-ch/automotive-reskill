@@ -48,3 +48,34 @@ CV processing.
 Consider enriching expected outputs in test cases with specific 
 skill requirements from job ads corpus — would make eval more 
 precise but also more brittle. Revisit after Day 17 diagnosis.
+
+## Code refactoring
+- embed_jobs.py reads raw .txt files directly instead of using 
+  jobs_corpus.json from ingest_jobs.py. Refactor embed_jobs.py 
+  to read from jobs_corpus.json — single parsing logic, cleaner 
+  separation of concerns.
+
+## Corpus health monitoring (v2)
+Automate corpus_health.py to run after every corpus update.
+Add retrieval quality metrics (coverage rate, MRR per class).
+Consider UMAP visualisation for embedding space analysis.
+Production tools: Arize AI, Evidently, LangSmith for at-scale monitoring.
+
+## Roadmap generator improvements (v2)
+- Add ChromaDB semantic search for course retrieval — current 
+  keyword scoring misses semantically similar courses with 
+  different vocabulary
+- Refresh BG eligibility after Day 22 Bildungsgutschein research 
+  — enrich unknown entries in courses.yaml
+- Add course sequencing validation — ensure prerequisites are 
+  met before recommending advanced courses
+- Add estimated weekly hours per course — helps users plan 
+  around work commitments
+- Consider splitting roadmap into "employed" vs "unemployed" 
+  variants — different time availability and funding options
+
+## Bridge actions enrichment (Day 12 debt)
+- Bridge actions in automotive_to_ai_mappings.yaml currently 
+  generic. Enrich with specific course citations now that 
+  course corpus exists. Cross-reference gap analyzer bridge 
+  actions with courses.yaml target_skills.

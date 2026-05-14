@@ -257,3 +257,18 @@
 - Full pipeline per user: ~$0.033 (classification + gap analysis)
 - 15 eval cases: $0.49 total
 - At $0.033/run, 1000 users/month = $33 — very manageable
+
+**Incremental building creates duplication:**
+- ingest_jobs.py and embed_jobs.py both parse raw job ad files
+- jobs_corpus.json generated but never consumed
+- Happens naturally when building day-by-day without refactoring
+- Fix: designate ingest_jobs.py as canonical data loader,
+  embed_jobs.py reads from its output
+- Lesson: periodic refactoring sprints prevent accumulating 
+  technical debt
+
+- **Corpus health check**: Always measure distribution before 
+  assuming imbalance. Our ai_mngr retrieval failure looked like 
+  corpus imbalance (15 vs 18-35 docs) but ratios were acceptable 
+  (1.8x). Root cause was retrieval architecture, not data distribution.
+  Measure first, diagnose second, fix third.
